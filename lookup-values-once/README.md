@@ -15,6 +15,16 @@ answers without waiting for any human intervention, there is no chance of errors
 of the faculty member, the faculty member is freed up from having to be available at submission time, and the exercise
 can be opened to individual students rather than just student groups.
 
+## Result
+
+### Live Survey Example
+
+[https://kellogg.qualtrics.com/jfe/form/SV_6G1HRVZOU1hiCDX](https://kellogg.qualtrics.com/jfe/form/SV_6G1HRVZOU1hiCDX)
+
+### Survey Export
+
+[survey export](https://github.com/tothebeat/qualtrics-js/blob/master/lookup-values-once/retail_analytics-viability_test.qsf)
+
 ## Qualtrics Survey Construction
 
 Two questions, each are a multiline text entry, separated by a page break.
