@@ -19,6 +19,19 @@ can be opened to individual students rather than just student groups.
 
 Two questions, each are a multiline text entry, separated by a page break.
 
+### Survey Flow
+
+Add Embedded Data called `sale_choices`.
+
+### Survey Options
+
+1. Survey Experience
+  1. `Back Button` - Disable
+  2. `Save and Continue` - Disable
+2. Survey Protection
+  1. Select `By Invitation Only`
+  2. Select `Prevent Ballot Box Stuffing`
+
 ### Question 1
 
 * Question Name: QSalesIndicators
@@ -39,13 +52,10 @@ Qualtrics.SurveyEngine.addOnload(function()
 
 Qualtrics.SurveyEngine.addOnReady(function()
 {
-    /*Place your JavaScript here to run when the page is fully displayed*/
-
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
-    /*Place your JavaScript here to run when the page is unloaded*/
     var v = document.getElementById("QR~QID1").value;
     var new_e = v.strip().replace(/\n/g, ' ');
     Qualtrics.SurveyEngine.setEmbeddedData('sale_choices', new_e);
@@ -64,7 +74,6 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 ```javascript
 Qualtrics.SurveyEngine.addOnload(function()
 {
-    /*Place your JavaScript here to run when the page loads*/
     /*
     Rows in the sale_values array correspond to companies. The value in the first
     column corresponds to when there is a sale occurring at the given company. The
@@ -123,7 +132,5 @@ Qualtrics.SurveyEngine.addOnReady(function()
 
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
-    /*Place your JavaScript here to run when the page is unloaded*/
-
 });
 ```
