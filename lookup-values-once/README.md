@@ -21,6 +21,17 @@ Two questions, each are a multiline text entry, separated by a page break.
 
 ### Question 1
 
+* Question Name: QSalesIndicators
+* Question ID: QID1
+* Question Type: Text Entry
+* Text Type: Multi Line
+* Validation Options: Force Response
+* Validation Type: Custom Validation
+* Custom Validation - rule 1: question choice Matches Regex `([0-1]\n){5}` - exactly 5 lines with either a 0 or 1 on each
+* Custom Validation - (AND) rule 2: question choice Matches Regex `(1[0|\n]*){3}` - exactly 3 lines with a 1
+* Custom Validation - error message: [Custom Message](https://www.qualtrics.com/support/survey-platform/survey-module/editing-questions/validation/#CustomValidationMessages)
+
+
 ```javascript
 Qualtrics.SurveyEngine.addOnload(function()
 {
@@ -44,6 +55,11 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 ```
 
 ### Question 2
+
+* Question Name: QSalesData
+* Question ID: QID2
+* Question Type: Text Entry
+* Text Type: Multi Line
 
 ```javascript
 Qualtrics.SurveyEngine.addOnload(function()
