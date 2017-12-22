@@ -44,6 +44,7 @@ Add Embedded Data called `sale_choices`.
 * Custom Validation - (AND) rule 2: question choice Matches Regex `(1[0|\n]*){3}` - exactly 3 lines with a 1
 * Custom Validation - error message: [Custom Message](https://www.qualtrics.com/support/survey-platform/survey-module/editing-questions/validation/#CustomValidationMessages)
 
+#### Embedded JavaScript
 
 ```javascript
 Qualtrics.SurveyEngine.addOnload(function()
@@ -70,6 +71,8 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 * Question ID: QID2
 * Question Type: Text Entry
 * Text Type: Multi Line
+
+#### Embedded JavaScript
 
 ```javascript
 Qualtrics.SurveyEngine.addOnload(function()
