@@ -28,18 +28,18 @@ Qualtrics.SurveyEngine.addOnload(function()
 
 Qualtrics.SurveyEngine.addOnReady(function()
 {
-	/*Place your JavaScript here to run when the page is fully displayed*/
+    /*Place your JavaScript here to run when the page is fully displayed*/
 
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
-	/*Place your JavaScript here to run when the page is unloaded*/
-	var v = document.getElementById("QR~QID1").value;
-	var new_e = v.strip().replace(/\n/g, ' ');
-	Qualtrics.SurveyEngine.setEmbeddedData('sale_choices', new_e);
-	console.log('Page unloaded!');
-	console.log('embedded data sale_choices set to ' + new_e);
+    /*Place your JavaScript here to run when the page is unloaded*/
+    var v = document.getElementById("QR~QID1").value;
+    var new_e = v.strip().replace(/\n/g, ' ');
+    Qualtrics.SurveyEngine.setEmbeddedData('sale_choices', new_e);
+    console.log('Page unloaded!');
+    console.log('embedded data sale_choices set to ' + new_e);
 });
 ```
 
