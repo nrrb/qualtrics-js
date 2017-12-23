@@ -160,6 +160,10 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 
 #### Obfuscated Embedded JavaScript
 
+If the calculation steps or constants involved should not be seen easily in the source of the page, then you can run
+the code inside the callback function being passed to `Qualtrics.SurveyEngine.addOnload()` through a JavaScript Obfuscator
+like [this one](https://www.danstools.com/javascript-obfuscate/index.php). You would get something like this.
+
 ```javascript
 Qualtrics.SurveyEngine.addOnload(function()
 {
