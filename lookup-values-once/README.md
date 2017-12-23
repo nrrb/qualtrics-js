@@ -9,16 +9,27 @@ individuals to limit the work the professor would have to do.
 
 ## Motivation
 
-By putting this calculation into JavaScript embedded in Qualtrics, utilizing Qualtrics controls to prevent students from
-re-submitting, the faculty member is able to improve the class exercise in a number of ways: 
+By automating this, the faculty member would be able to improve the class exercise in a number of ways: 
 
 1. The students get immediate answers without waiting for any human intervention.
 2. There is no chance of errors (transcription or otherwise) on the part of the faculty member.
 3. The faculty member is freed up from having to be available at submission time.
 4. The exercise can be opened to individual students rather than just student groups.
 
-
 ## Result
+
+This is a proof-of-concept Qualtrics survey that uses Qualtrics controls to ensure that an answer is only submitted once per
+student, with form validation to make sure an answer of the right type is entered, and the student is then given new values
+through a custom calculation performed in JavaScript embedded in the survey. 
+
+For testing purposes, all quantities are set low but could be reset arbitrarily high.
+
+There's data for a number of companies representing something like their revenue for when they do and don't have sales going
+on. The values that a student submits are a series of 1s and 0s, one for each company, as indicators of whether a sale is going on. 
+
+In this example, there are only 5 companies, and form validation on the first question ensures that the student only
+submitted 5 values. There must be the same number of input values as there are companies. The 0 or 1 inputs must be
+separated by carriage returns/new lines in the input text area. There must also be a carriage return after the last line.
 
 ### Live Survey Example
 
