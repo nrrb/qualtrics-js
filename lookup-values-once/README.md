@@ -10,10 +10,13 @@ individuals to limit the work the professor would have to do.
 ## Motivation
 
 By putting this calculation into JavaScript embedded in Qualtrics, utilizing Qualtrics controls to prevent students from
-re-submitting, the faculty member is able to improve the class exercise in a number of ways: the students get immediate
-answers without waiting for any human intervention, there is no chance of errors (transcription or otherwise) on the part
-of the faculty member, the faculty member is freed up from having to be available at submission time, and the exercise
-can be opened to individual students rather than just student groups.
+re-submitting, the faculty member is able to improve the class exercise in a number of ways: 
+
+1. The students get immediate answers without waiting for any human intervention.
+2. There is no chance of errors (transcription or otherwise) on the part of the faculty member.
+3. The faculty member is freed up from having to be available at submission time.
+4. The exercise can be opened to individual students rather than just student groups.
+
 
 ## Result
 
