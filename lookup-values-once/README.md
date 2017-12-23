@@ -1,11 +1,16 @@
 ## Background
 
 In this use case, the professor wants a way that students can submit a set of values once and have a custom calculation 
-performed on them only once. This replaces a homework exercise where teams of students would submit a set of values to a
-human (usually the professor), who would manually perform calculations/lookups using these values with a custom Excel
-spreadsheet, and send them back. This was a manually intensive process, required the professor to be available to process
-answers in real-time at submission time, and limited submissions to being on behalf of student groups instead of
-individuals to limit the work the professor would have to do.
+performed on them only once.
+
+This replaces a homework exercise where teams of students would submit a set of values to a human (usually the professor),
+who would manually perform calculations/lookups using these values with a custom Excel spreadsheet, and send them back.
+
+This setup has a number of caveats:
+
+1. It's a manually intensive process for the professor.
+2. If the professor wants to be responsive to their students, they need to be available and working during the period that students can submit their answers.
+3. Because of the number of students in the class and the arduous nature of the data processing, the professor usually limits this exercise to groups of students where each group submits one collected set of answers. 
 
 ## Motivation
 
