@@ -1,0 +1,28 @@
+<!-- header -->
+<!--
+In order to interface with the embedded variables in a Qualtrics survey, as
+configured in the Survey Flow, one must use a hidden input field with the
+following syntax:
+
+<input type="hidden" id="VariableName" name="ED~VariableName" value="${e://Field/VariableName}" />
+
+Where the name of the embedded variable in Survey Flow is named "VariableName". 
+
+This HTML code can be inserted either in the survey question HTML itself, or
+in the header of the survey under Look & Feel.
+-->
+<!-- Solvable Tile Puzzle variables -->
+<input type="hidden" id="SolvablePuzzle-NumMoves" name="ED~SolvablePuzzle-NumMoves" value="${e://Field/SolvablePuzzle-NumMoves}" />
+<input type="hidden" id="SolvablePuzzle-Timer" name="ED~SolvablePuzzle-Timer" value="${e://Field/SolvablePuzzle-Timer}" />	
+<input type="hidden" id="SolvablePuzzle-IsSolved" name="ED~SolvablePuzzle-IsSolved" value="${e://Field/SolvablePuzzle-IsSolved}" />	
+<!-- Unsolvable Tile Puzzle variables -->
+<input type="hidden" id="UnsolvablePuzzle-NumMoves" name="ED~UnsolvablePuzzle-NumMoves" value="${e://Field/UnsolvablePuzzle-NumMoves}" />
+<input type="hidden" id="UnsolvablePuzzle-Timer" name="ED~UnsolvablePuzzle-Timer" value="${e://Field/UnsolvablePuzzle-Timer}" />
+<!-- Low Depletion variables -->
+<input type="hidden" id="Stopwatch-LowDepl" name="ED~Stopwatch-LowDepl" value="${e://Field/Stopwatch-LowDepl}" />
+<input type="hidden" id="CharactersSelected-LowDepl" name="ED~CharactersSelected-LowDepl" value="${e://Field/CharactersSelected-LowDepl}" /> 
+<!-- High Depletion variables -->
+<input type="hidden" id="CharactersSelected-HighDepl" name="ED~CharactersSelected-HighDepl" value="${e://Field/CharactersSelected-HighDepl}" />
+<input type="hidden" id="SpecialCharactersSelected-HighDepl" name="ED~SpecialCharactersSelected-HighDepl" value="${e://Field/SpecialCharactersSelected-HighDepl}" />
+<input type="hidden" id="Stopwatch-HighDepl" name="ED~Stopwatch-HighDepl" value="${e://Field/Stopwatch-HighDepl}" />
+

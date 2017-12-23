@@ -1,0 +1,99 @@
+<style>
+ #corpustext {
+  font-family: monospace;
+  font-size: x-large;
+  background-color: white;
+  color: black;
+ }
+ .selected {
+  background-color: yellow;
+ }
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+<script type="text/javascript">
+
+
+
+var Stopwatch = function() {
+ var currentTime = parseInt(jQuery('#Stopwatch-LowDepl').val());
+ currentTime += 1;
+ jQuery('#Stopwatch-LowDepl').val(currentTime);
+ setTimeout(Stopwatch, 1000);
+}
+
+var proportionCorrect = 0.2;
+
+var tagText = function() {
+ var corpus = jQuery('#corpustext').html();
+ // if I was better with regexps in js, I wouldn't have the following ugliness
+ var corpus_array = corpus.split("e");
+ var new_corpus = corpus_array[0];
+ for(var i = 1; i < corpus_array.length; i++) {
+  var last_chunk = corpus_array[i-1];
+  var this_chunk = corpus_array[i];
+  var e_replacement = "";
+  // 1/18/2011 - Have to replace this first "if" clause if I want
+  // to make the matching regular expressions for a suitable "e" truly
+  // variable on the fly
+  if((last_chunk.length==1) || (this_chunk.length==1)) {
+   // a special case, where a preceding or forthcoming 'e' in the text
+   // makes this 'e' a regular 'e'
+   e_replacement = '<span class="e wrong">e</span>';
+  }
+  else if((last_chunk.search(/[^aeiou]{2}$/i)>=0) && (this_chunk.search(/^[^aeiou]{2}/i)>=0)) {
+   // this is the 'e' we're looking for
+   e_replacement = '<span class="e right">e</span>';
+  }
+  else {
+   // The dregs of the 'e' placements
+   e_replacement = '<span class="e wrong">e</span>';
+  }
+  new_corpus += e_replacement + this_chunk;
+ }
+ jQuery('#corpustext').html(new_corpus);
+};
+
+var charsSelected = 0;
+
+jQuery(document).ready(function() {
+ tagText();
+// Loosely based on the Qualtrics Question API as documented here: http://www.qualtrics.com/university/api/
+// I assume that the id of the next button being 'NextButton' is subject to change without notice
+ jQuery('#NextButton').hide();
+ //jQuery('#CharactersSelected-LowDepl').val(charsSelected = 0);
+ jQuery('#Stopwatch-LowDepl').val(0);
+ Stopwatch();
+ jQuery('#corpustext .e').click(function() {
+  jQuery(this).toggleClass('selected');
+  charsSelected = jQuery('.e.selected').length;
+  charsSpecialSelected = jQuery('.e.right.selected').length;
+  jQuery('#CharactersSelected-LowDepl').val(charsSelected);
+  if(charsSelected >= proportionCorrect * jQuery('.e').length) {
+    jQuery('#NextButton').show();
+  } else {
+    jQuery('#NextButton').hide();
+  }
+ });
+});
+</script>
+
+<div id="corpustext">
+ mnemonics persons SpPeIn concept users nominate capture the properties 
+ consistently sensitivity specificity confidence propagation clozapine other 
+ antipsychotic between measure number case reports calculated deviations 
+ myocarditis ore against SnNeout disproportionality Chlorpromazine lithium 
+ end fluphenazine overestimation negative tests have coined increasingly 
+ popular with many based medicine listing websites Partial statistics 
+ component association verification cauchy website together individually 
+ information component evidence become tests bias when index reference 
+ patients overestimation sensitivity underestimation are case reports adverse 
+ reaction not applied confirm negative results lead some are either excluded 
+ considered true negatives fraction gate further testing crosscheck study 
+ that subjected liver enzymes medical record review physician interviews 
+ possibly introducing bayesian strength of dependency network implements 
+ called information neural network architecture information component gloomy 
+ who network suspected background reports database We drug adverse reaction 
+ using between reaction distribution considered Kurtosis radio aberration 
+ information component minus standard positive value McMk based on number 
+ elevation cardiomyopathy denote set model ballet specific combination number 
+ further details &nbsp;</div>

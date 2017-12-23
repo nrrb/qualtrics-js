@@ -1,0 +1,208 @@
+<!-- Unsolvable Puzzle -->
+<style>
+	table {
+		border-collapse: collapse;
+	}
+	table, tr, td {
+		border: 1px solid black;
+		padding: 0px;
+		margin: 0px;
+	}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+<script type="text/javascript">
+	<!-- Unsolvable Puzzle -->
+var maxTimeSeconds = 30*60;
+
+var Stopwatch = function() {
+	var currentTime = parseInt(jQuery('#UnsolvablePuzzle-Timer').val());
+	currentTime += 1;
+	jQuery('#UnsolvablePuzzle-Timer').val(currentTime);
+	if(currentTime > maxTimeSeconds) {
+		DisablePuzzle();
+	}	
+	setTimeout(Stopwatch, 1000);
+}
+
+var DisablePuzzle = function() {
+	// Just disable click functionality and tell the user they have to move on
+	jQuery('td').unbind('click');
+	jQuery('#PuzzleExpired').html("Time has run out for this portion of the test. Please move on to the next step.");
+}
+
+// Admittedly, this is kind of poorly coded style-wise but it gets the job done for now.
+// I'd like to rewrite this code to wrap it into a SlidingPuzzle class that can be generalized
+// to MxN size grids, and get this off into another file with minimal knowledge needed by the
+// user to instantiate one of these in the $(document).ready() callback. - 1/25 10:40pm
+var adjacenciesList = {'box1': ['box2', 'box5'],
+						'box2': ['box1', 'box3', 'box6'],
+						'box3': ['box2', 'box4', 'box7'],
+						'box4': ['box3', 'box8'],
+						'box5': ['box1', 'box6', 'box9'],
+						'box6': ['box2', 'box5', 'box7', 'box10'],
+						'box7': ['box3', 'box6', 'box8', 'box11'],
+						'box8': ['box4', 'box7', 'box12'],
+						'box9': ['box5', 'box10', 'box13'],
+						'box10': ['box6', 'box9', 'box11', 'box14'],
+						'box11': ['box7', 'box10', 'box12', 'box15'],
+						'box12': ['box8', 'box11', 'box16'],
+						'box13': ['box9', 'box14'],
+						'box14': ['box10', 'box13', 'box15'],
+						'box15': ['box11', 'box14', 'box16'],
+						'box16': ['box12', 'box15']};
+var blankSpace = '<img src="http://images.goggl.es/projects/qualtricspuzzles/images/blank_space.png" width="150" height="150" />';
+var validStartBoard = { 'box1':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box1.png" width="150" height="150" />',
+						'box2':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box2.png" width="150" height="150" />',
+						'box3':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box3.png" width="150" height="150" />',
+						'box4':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box4.png" width="150" height="150" />',
+						'box5':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box5.png" width="150" height="150" />',
+						'box6':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box6.png" width="150" height="150" />',
+						'box7':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box7.png" width="150" height="150" />',
+						'box8':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box8.png" width="150" height="150" />',
+						'box9':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box9.png" width="150" height="150" />',
+						'box10':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box10.png" width="150" height="150" />',
+						'box11':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box11.png" width="150" height="150" />',
+						'box12':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box12.png" width="150" height="150" />',
+						'box13':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box13.png" width="150" height="150" />',
+						'box14':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box14.png" width="150" height="150" />',
+						'box15':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box15.png" width="150" height="150" />',
+						'box16':blankSpace};
+var invalidStartBoard = {   'box1':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box1.png" width="150" height="150" />',
+							'box2':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box2.png" width="150" height="150" />',
+							'box3':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box3.png" width="150" height="150" />',
+							'box4':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box4.png" width="150" height="150" />',
+							'box5':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box5.png" width="150" height="150" />',
+							'box6':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box6.png" width="150" height="150" />',
+							'box7':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box7.png" width="150" height="150" />',
+							'box8':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box8.png" width="150" height="150" />',
+							'box9':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box9.png" width="150" height="150" />',
+							'box10':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box10.png" width="150" height="150" />',
+							'box11':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box11.png" width="150" height="150" />',
+							'box12':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box12.png" width="150" height="150" />',
+							'box13':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box13.png" width="150" height="150" />',
+							'box14':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box15.png" width="150" height="150" />',
+							'box15':'<img src="http://images.goggl.es/projects/qualtricspuzzles/images/box14.png" width="150" height="150" />',
+							'box16':blankSpace};
+var startBoard = invalidStartBoard;
+//var moves = new Array();
+var movesStart = {6: [['box15','box16'],['box11','box15'],['box10','box11'],['box10','box6'],['box6','box7'],['box7','box3']],
+				  7: [['box15','box16'],['box14','box15'],['box10','box14'],['box10','box9'],['box9','box5'],['box5','box6'],['box6','box2']],
+				  8: [['box16','box12'],['box12','box8'],['box8','box7'],['box7','box6'],['box6','box10'],['box10','box11'],['box11','box7'],['box7','box3']],
+10: [['box16','box15'],['box15','box14'],['box14','box10'],['box10','box6'],['box6','box7'],['box7','box11'],['box11','box12'],['box12','box8'],['box8','box7'],['box7','box6']]};
+var moves = movesStart[10];
+var movesLengthStart = moves.length;
+
+function Move(box1, box2) {
+	moves.push([box1, box2]);
+jQuery('#UnsolvablePuzzle-NumMoves').val(moves.length - movesLengthStart);
+}
+
+/*
+function isValidMove(box1, box2) {
+	// Check that one of them is the blank space
+	if((box1!=blankSpace) && (box2!=blankSpace)) {
+		return false;
+	}
+	// Check that they are adjacent
+	if(box1 in adjacenciesList[box2]) {
+		return true;
+	}
+	return false;
+}
+*/
+function hasWon(basePuzzleState) {
+	var currentState = ApplyMoves(basePuzzleState, moves);
+	for(var i in currentState) {
+		if(currentState[i] != validStartBoard[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function ClickBox(basePuzzleState, boxClicked) {
+	var currentState = ApplyMoves(basePuzzleState, moves);
+	var blankBox;
+	for(var i in currentState) {
+		if(currentState[i] == blankSpace) {
+			blankBox = i;
+			break;
+		}
+	}
+	// Is the blank box in the list of adjacent boxes?
+	var adjacentBoxes = adjacenciesList[boxClicked];
+	var blankIsAdjacent = false;
+	for(var i in adjacentBoxes) {
+		if(blankBox==adjacentBoxes[i]) {
+			blankIsAdjacent = true;
+			break;
+		}
+	}
+	if(blankIsAdjacent) {
+		Move(boxClicked, blankBox);
+		// Display the new board
+		DisplayPuzzle(ApplyMoves(basePuzzleState, moves));
+		// Check if we've won
+		if(hasWon(basePuzzleState)) {
+			jQuery('#win').html("<h2>You won!</h2>"); 
+		}
+		
+	}
+}
+
+// We may want to handle different sets of moves for custom puzzles
+// As well as different base configurations for legal/illegal games
+function ApplyMoves(basePuzzleState, movesList) {
+	// Make a copy of the base values
+	var currentState = {};
+	for(var i in basePuzzleState) {
+			currentState[i] = basePuzzleState[i];
+	}
+	// Apply the moves to the copy
+	for(var i in movesList) {
+			var move = movesList[i];
+			var temp = currentState[move[0]];
+			currentState[move[0]] = currentState[move[1]];
+			currentState[move[1]] = temp;
+	}
+	// Return the copy
+return currentState;
+}
+
+function DisplayPuzzle(puzzleState) {
+	// Fill in the inner html of each table cell with the corresponding puzzle state cell
+	for(var box in puzzleState) {
+		jQuery('#' + box).html(puzzleState[box]);
+	}
+}
+
+
+jQuery(document).ready(function() {
+	DisplayPuzzle(ApplyMoves(startBoard, moves));
+	jQuery('#UnsolvablePuzzle-Timer').val(0);
+	Stopwatch();	
+	jQuery('td').click(function() {
+		var boxClicked = jQuery(this).attr('id');
+		ClickBox(startBoard, boxClicked);			
+		// var currentTime = parseInt(jQuery('#UnsolvablePuzzle-Timer').val());
+		// if(currentTime < 60) {
+			// var boxClicked = jQuery(this).attr('id');
+			// ClickBox(startBoard, boxClicked);			
+		// } else {
+			// jQuery('#PuzzleExpired').html("Time has run out for this portion of the test. Please move on to the next step.");
+		// }
+	});
+});
+</script>
+<div id="PuzzleExpired"></div>
+<div>
+	<table>
+		<tr><td id="box1"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box1.png" width="150" height="150" /></td><td id="box2"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box2.png" width="150" height="150" /></td><td id="box3"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box3.png" width="150" height="150" /></td><td id="box4"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box4.png" width="150" height="150" /></td></tr>
+		<tr><td id="box5"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box5.png" width="150" height="150" /></td><td id="box6"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/blank_space.png" width="150" height="150" /></td><td id="box7"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box7.png" width="150" height="150" /></td><td id="box8"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box11.png" width="150" height="150" /></td></tr>
+		<tr><td id="box9"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box9.png" width="150" height="150" /></td><td id="box10"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box6.png" width="150" height="150" /></td><td id="box11"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box12.png" width="150" height="150" /></td><td id="box12"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box8.png" width="150" height="150" /></td></tr>
+		<tr><td id="box13"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box13.png" width="150" height="150" /></td><td id="box14"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box10.png" width="150" height="150" /></td><td id="box15"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box15.png" width="150" height="150" /></td><td id="box16"><img src="http://images.goggl.es/projects/qualtricspuzzles/images/box14.png" width="150" height="150" /></td></tr>
+
+	</table>        
+</div>
+<div id="win"></div>
+
