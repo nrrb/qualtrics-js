@@ -69,8 +69,8 @@ Add Embedded Data called `sale_choices`.
 * Text Type: Multi Line
 * Validation Options: Force Response
 * Validation Type: Custom Validation
-* Custom Validation - rule 1: question choice Matches Regex `([0-1]\n){5}` - exactly 5 lines with either a 0 or 1 on each
-* Custom Validation - (AND) rule 2: question choice Matches Regex `(1[0|\n]*){3}` - exactly 3 lines with a 1
+* Custom Validation - rule 1: question choice Matches Regex `([0-1]\n){4}[0-1]` - exactly 5 lines with either a 0 or 1 on each
+* Custom Validation - (AND) rule 2: question choice Matches Regex `^(1[0|\n]*){3}[0|\n]*$` - exactly 3 of the lines are a 1
 * Custom Validation - error message: [Custom Message](https://www.qualtrics.com/support/survey-platform/survey-module/editing-questions/validation/#CustomValidationMessages)
 
 #### Embedded JavaScript
