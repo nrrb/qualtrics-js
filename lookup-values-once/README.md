@@ -40,10 +40,6 @@ separated by carriage returns/new lines in the input text area. There must also 
 
 [https://kellogg.qualtrics.com/jfe/form/SV_6G1HRVZOU1hiCDX](https://kellogg.qualtrics.com/jfe/form/SV_6G1HRVZOU1hiCDX)
 
-### Survey Export
-
-[survey export](https://github.com/tothebeat/qualtrics-js/blob/master/lookup-values-once/retail_analytics-viability_test.qsf)
-
 ## Qualtrics Survey Construction
 
 Two questions, each are a multiline text entry, separated by a page break.
