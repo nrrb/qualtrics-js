@@ -69,6 +69,19 @@ Add Embedded Data called `sale_choices`.
 * Custom Validation - (AND) rule 2: question choice Matches Regex `^(1[0|\n]*){3}[0|\n]*$` - exactly 3 of the lines are a 1
 * Custom Validation - error message: [Custom Message](https://www.qualtrics.com/support/survey-platform/survey-module/editing-questions/validation/#CustomValidationMessages)
 
+It’s simple to modify the regular expressions used in the custom validation for any number of required lines and 1’s. For example, for 100 required lines and 60 of them being 1’s, the regular expressions would be:
+
+1.	`^([0-1]\n){99}[0-1][\n]*$`
+2.	`^(1[0|\n]*){59}[0|\n]*$`
+
+Along the same lines, if you wanted a range of numbers, here’s another example. Let’s say you want to accept 100-130 lines and 60-70 of them to be 1’s:
+
+1.	`^([0-1]\n){99,129}[0-1][\n]*$`
+2.	`^(1[0|\n]*){59,69}[0|\n]*$`
+
+I recommend this regular expression builder/tester/reference: https://pythex.org/
+
+
 #### Embedded JavaScript
 
 ```javascript
